@@ -3,7 +3,9 @@ class StocksController < ApplicationController
         if params[:stock].present?
             begin
                 @stock = Stock.new_from_lookup(params[:stock])
-                render 'users/my_portfolio'
+                respond_to do |format|
+                    format.js { render partial: 'users/result' }
+                end
             rescue NilStockException => e
                 flash[:danger] = e.message
                 redirect_to my_portfolio_path
