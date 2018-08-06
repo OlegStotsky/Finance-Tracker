@@ -1,8 +1,8 @@
 class StocksController < ApplicationController
     def search
         unless params[:stock].present?
-            flash[:danger] = "You have entered empty search string"
-            redirect_to my_portfolio_path
+            flash.now[:danger] = "You have entered empty search string"
+            render partial: 'users/result'
             return
         end
         begin
@@ -11,8 +11,8 @@ class StocksController < ApplicationController
                 format.js { render partial: 'users/result' }
             end
         rescue NilStockException => e
-            flash[:danger] = e.message
-            redirect_to my_portfolio_path
+            flash.now[:danger] = e.message
+            render partial: 'users/result'
         end
     end
 end
