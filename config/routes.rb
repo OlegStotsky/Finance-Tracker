@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root 'pages#index'
   get 'my_portfolio', to: 'users#my_portfolio'
   get 'search_stocks', to: 'stocks#search'
+  resources :user_stocks, only: [:create]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
